@@ -95,6 +95,7 @@
                 push
                 color="positive"
                 icon="img:statics/outbound/order.png"
+                :disabled="props.row.dn_status !== $t('outbound.freshorder')"
                 @click="neworderData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('confirmorder') }}</q-tooltip>
@@ -111,6 +112,7 @@
                 push
                 color="positive"
                 icon="img:statics/outbound/orderrelease.png"
+                :disabled="props.row.dn_status !== $t('outbound.neworder')"
                 @click="orderreleaseData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('releaseorder') }}</q-tooltip>
@@ -143,6 +145,7 @@
                 push
                 color="purple"
                 icon="img:statics/outbound/picked.png"
+                :disabled="props.row.dn_status !== $t('outbound.pickstock')"
                 @click="pickedData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('confirmpicked') }}</q-tooltip>
@@ -159,6 +162,7 @@
                 push
                 color="dark"
                 icon="rv_hookup"
+                :disabled="props.row.dn_status !== $t('outbound.pickedstock')"
                 @click="DispatchDN(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('dispatch') }}</q-tooltip>
@@ -175,6 +179,7 @@
                 push
                 color="info"
                 icon="img:statics/outbound/receiving.png"
+                :disabled="props.row.dn_status !== $t('outbound.shippedstock')"
                 @click="PODData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('outbound.pod') }}</q-tooltip>
@@ -191,6 +196,7 @@
                 push
                 color="purple"
                 icon="edit"
+                :disabled="props.row.dn_status !== $t('outbound.freshorder')"
                 @click="editData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('edit') }}</q-tooltip>
@@ -207,6 +213,7 @@
                 push
                 color="dark"
                 icon="delete"
+                :disabled="props.row.dn_status !== $t('outbound.freshorder')"
                 @click="deleteData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('delete') }}</q-tooltip>

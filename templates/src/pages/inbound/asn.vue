@@ -86,6 +86,7 @@
                 flat
                 push
                 color="positive"
+                :disabled="props.row.asn_status !== $t('inbound.predeliverystock')"
                 icon="img:statics/inbound/preloadstock.png"
                 @click="preloadData(props.row)"
               >
@@ -97,6 +98,7 @@
                 push
                 color="positive"
                 icon="img:statics/inbound/presortstock.png"
+                :disabled="props.row.asn_status !== $t('inbound.preloadstock')"
                 @click="presortData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('finishloading') }}</q-tooltip>
@@ -107,6 +109,7 @@
                 push
                 color="purple"
                 icon="img:statics/inbound/sortstock.png"
+                :disabled="props.row.asn_status !== $t('inbound.presortstock')"
                 @click="sortedData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('confirmsorted') }}</q-tooltip>
@@ -117,6 +120,7 @@
                 push
                 color="purple"
                 icon="edit"
+                :disabled="props.row.asn_status !== $t('inbound.predeliverystock')"
                 @click="editData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('edit') }}</q-tooltip>
@@ -133,6 +137,7 @@
                 push
                 color="dark"
                 icon="delete"
+                :disabled="props.row.asn_status !== $t('inbound.predeliverystock')"
                 @click="deleteData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('delete') }}</q-tooltip>
