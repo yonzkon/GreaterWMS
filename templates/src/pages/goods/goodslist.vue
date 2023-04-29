@@ -84,6 +84,11 @@
             <template v-else-if="props.row.id !== editid">
               <q-td key="goods_supplier" :props="props">{{ props.row.goods_supplier }}</q-td>
             </template>
+            <template>
+              <q-td key="goods_image" :props="props">
+                <q-img :src="'upload/images/' + props.row.id "></q-img>
+              </q-td>
+            </template>
             <template v-if="props.row.id === editid">
               <q-td key="goods_weight" :props="props">
                 <q-input
@@ -330,6 +335,9 @@
                     {{ $t('goods.view_goodslist.print_goods_label') }}
                   </q-tooltip>
                 </q-btn>
+                <q-btn round flat push color="green" icon="upload" @click="imgupload(props.row.id)">
+                  <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('imgupload') }}</q-tooltip>
+                </q-btn>
                 <q-btn round flat push color="purple" icon="edit" @click="editData(props.row)">
                   <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('edit') }}</q-tooltip>
                 </q-btn>
@@ -375,7 +383,7 @@
             <q-tooltip content-class="bg-amber text-black shadow-4">{{ $t('index.close') }}</q-tooltip>
           </q-btn>
         </q-bar>
-        <q-card-section style="max-height: 325px; width: 400px" class="scroll">
+        <q-card-section style="max-height: 525px; width: 400px" class="scroll">
           <q-input
             dense
             outlined
@@ -574,6 +582,24 @@
         </div>
       </q-card>
     </q-dialog>
+    <q-dialog v-model="imguploadForm">
+      <q-card class="shadow-24">
+        <q-bar class="bg-light-blue-10 text-white rounded-borders" style="height: 30px">
+          <div>{{ $t('imgupload') }}</div>
+          <q-space />
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip>{{ $t('index.close') }}</q-tooltip>
+          </q-btn>
+        </q-bar>
+        <q-uploader
+          :url="'upload/images/' + imguploadid"
+          color="green"
+          text-color="black"
+          style="max-width: 300px"
+          accept=".jpg, image/*"
+        />
+      </q-card>
+    </q-dialog>
     <q-dialog v-model="viewForm">
       <div id="printMe" style="width: 400px;height:280px;background-color: white">
         <q-card-section>
@@ -636,6 +662,7 @@ export default {
         { name: 'goods_code', required: true, label: this.$t('goods.view_goodslist.goods_code'), align: 'left', field: 'goods_code' },
         { name: 'goods_desc', label: this.$t('goods.view_goodslist.goods_desc'), field: 'goods_desc', align: 'center' },
         { name: 'goods_supplier', label: this.$t('goods.view_goodslist.goods_supplier'), field: 'goods_supplier', align: 'center' },
+        { name: 'goods_image', label: this.$t('goods.view_goodslist.goods_image'), field: 'goods_image', align: 'center' },
         { name: 'goods_weight', label: this.$t('goods.view_goodslist.goods_weight'), field: 'goods_weight', align: 'center' },
         { name: 'goods_w', label: this.$t('goods.view_goodslist.goods_w'), field: 'goods_w', align: 'center' },
         { name: 'goods_d', label: this.$t('goods.view_goodslist.goods_d'), field: 'goods_d', align: 'center' },
@@ -680,6 +707,8 @@ export default {
         goods_price: '',
         creater: ''
       },
+      imguploadForm: false,
+      imguploadid: 0,
       editid: 0,
       editFormData: {},
       editMode: false,
@@ -878,6 +907,11 @@ export default {
         goods_price: '',
         creater: ''
       };
+    },
+    imgupload(e) {
+      var _this = this;
+      _this.imguploadForm = true;
+      _this.imguploadid = e;
     },
     editData(e) {
       var _this = this;
