@@ -1,3 +1,4 @@
+import os.path
 from rest_framework import viewsets
 from .models import ListModel
 from . import serializers
@@ -23,6 +24,7 @@ from .files import FileRenderCN, FileRenderEN
 from rest_framework.settings import api_settings
 from asn.models import AsnDetailModel
 from django.db.models import Q
+from django.http import FileResponse
 
 class SannerGoodsTagView(viewsets.ModelViewSet):
 
@@ -367,3 +369,23 @@ class FileDownloadView(viewsets.ModelViewSet):
         )
         response['Content-Disposition'] = "attachment; filename='goodslist_{}.csv'".format(str(dt.strftime('%Y%m%d%H%M%S%f')))
         return response
+
+class ImguploadViewSet(viewsets.ViewSet):
+    def post(self, request, *args, **kwargs):
+        for k, v in self.request.FILES.items():
+            #f = open('static/img/goods/' + k, 'wb')
+            f = open('templates/public/statics/imgupload/goods/' + k, 'wb')
+            f.write(v.read())
+            f.close()
+            return Response({"detail": "success"})
+        raise APIException({"detail": "Please Select One File"})
+
+class ImgdownloadViewSet(viewsets.ViewSet):
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs.get('id')
+        fname = "templates/public/statics/imgupload/goods/" + str(id)
+        if os.path.isfile(fname):
+            f = open(fname, "rb")
+            response = FileResponse(f)
+            return response
+        raise APIException({"detail": "Image Not Exists"})

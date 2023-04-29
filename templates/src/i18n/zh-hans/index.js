@@ -344,6 +344,7 @@ export default {
     view_asn: {
       asn_code: '到货通知书单号',
       asn_status: '到货通知书状态',
+      asn_image: '到货通知书图片',
       goods_qty: '到货通知书数量',
       goods_actual_qty: '实际到货数量',
       goods_shortage_qty: '到货短少数量',

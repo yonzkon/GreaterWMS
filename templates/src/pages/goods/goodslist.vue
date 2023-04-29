@@ -86,7 +86,7 @@
             </template>
             <template>
               <q-td key="goods_image" :props="props">
-                <q-img :src="'upload/images/' + props.row.id "></q-img>
+                <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="width: 100px"></q-img>
               </q-td>
             </template>
             <template v-if="props.row.id === editid">
@@ -599,7 +599,10 @@
           </q-btn>
         </q-bar>
         <q-uploader
-          :url="'upload/images/' + imguploadid"
+          :url="imgupload_pathname + imguploadid"
+          method="post"
+          :headers="[{ name: 'token', value: token }, { name: 'language', value: lang }, { name: 'operator', value: login_id }]"
+          :field-name="file => imguploadid"
           color="green"
           text-color="black"
           style="max-width: 300px"
@@ -633,6 +636,7 @@
 <router-view />
 
 <script>
+import { baseurl } from 'boot/axios_request';
 import { getauth, postauth, putauth, deleteauth } from 'boot/axios_request'
 import { LocalStorage } from 'quasar'
 
@@ -640,6 +644,9 @@ export default {
   name: 'Pagegoodslist',
   data () {
     return {
+      token: LocalStorage.getItem('openid'),
+      lang: LocalStorage.getItem('lang'),
+      login_id: LocalStorage.getItem('login_id'),
       goods_code: '',
       goods_desc: '',
       openid: '',
@@ -716,6 +723,8 @@ export default {
       },
       imguploadForm: false,
       imguploadid: 0,
+      imgupload_pathname: baseurl + '/goods/imgupload/',
+      imgupload_pathname_get: 'statics/imgupload/goods/',
       editid: 0,
       editFormData: {},
       editMode: false,

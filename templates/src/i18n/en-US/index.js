@@ -347,6 +347,7 @@ export default {
     view_asn: {
       asn_code: 'ASN Code',
       asn_status: 'ASN Status',
+      asn_image: 'ASN Image',
       goods_qty: 'ASN QTY',
       goods_actual_qty: 'Actual Arrive Qty',
       goods_shortage_qty: 'Arrive Shortage Qty',
