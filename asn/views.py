@@ -1189,3 +1189,13 @@ class FileDetailDownloadView(viewsets.ModelViewSet):
         )
         response['Content-Disposition'] = "attachment; filename='asndetail_{}.csv'".format(str(dt.strftime('%Y%m%d%H%M%S%f')))
         return response
+
+class ImguploadViewSet(viewsets.ViewSet):
+    def post(self, request, *args, **kwargs):
+        for k, v in self.request.FILES.items():
+            #f = open('static/img/goods/' + k, 'wb')
+            f = open('templates/public/statics/imgupload/asn/' + k, 'wb')
+            f.write(v.read())
+            f.close()
+            return Response({"detail": "success"})
+        raise APIException({"detail": "Please Select One File"})

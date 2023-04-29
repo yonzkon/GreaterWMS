@@ -10,5 +10,7 @@ re_path(r'^(?P<pk>\d+)/', views.APIViewSet.as_view({
     'patch': 'partial_update',
     'delete': 'destroy'
 }), name="goods_1"),
-    path(r'goodstag/<str:bar_code>/',views.SannerGoodsTagView.as_view({"get":"retrieve"}))
+path(r'goodstag/<str:bar_code>/',views.SannerGoodsTagView.as_view({"get":"retrieve"})),
+path(r'imgupload/<int:id>', views.ImguploadViewSet.as_view({"post": "post"}), name="imgupload"),
+path(r'imgdownload/<int:id>', views.ImgdownloadViewSet.as_view({"get": "get"}), name="imgdownload"),
 ]
