@@ -369,6 +369,7 @@ export default {
     view_dn: {
       dn_code: 'DN Code',
       dn_status: 'DN Status',
+      dn_image: 'DN Image',
       goods_qty: 'Order QTY',
       intransit_qty: 'Shipping QTY',
       delivery_actual_qty: 'Delivery Actual QTY',

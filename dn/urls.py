@@ -40,5 +40,5 @@ re_path(r'^pod/(?P<pk>\d+)/$', views.DnPODViewSet.as_view({
 }), name="pod_1"),
 path(r'filelist/', views.FileListDownloadView.as_view({"get": "list"}), name="dnfilelistdownload"),
 path(r'filedetail/', views.FileDetailDownloadView.as_view({"get": "list"}), name="dnfiledetaildownload"),
-
+path(r'imgupload/<int:id>', views.ImguploadViewSet.as_view({"post": "post"}), name="imgupload"),
 ]

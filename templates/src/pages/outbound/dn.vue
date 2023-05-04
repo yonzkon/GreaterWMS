@@ -60,6 +60,9 @@
           <q-tr :props="props">
             <q-td key="dn_code" :props="props">{{ props.row.dn_code }}</q-td>
             <q-td key="dn_status" :props="props">{{ props.row.dn_status }}</q-td>
+            <q-td key="dn_image" :props="props">
+              <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="width: 100px"></q-img>
+            </q-td>
             <q-td key="total_weight" :props="props">{{ props.row.total_weight.toFixed(4) }}</q-td>
             <q-td key="total_volume" :props="props">{{ props.row.total_volume.toFixed(4) }}</q-td>
             <q-td key="customer" :props="props">{{ props.row.customer }}</q-td>
@@ -183,6 +186,9 @@
                 @click="PODData(props.row)"
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('outbound.pod') }}</q-tooltip>
+              </q-btn>
+              <q-btn round flat push color="green" icon="upload" @click="imgupload(props.row.id)">
+                <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('imgupload') }}</q-tooltip>
               </q-btn>
               <q-btn
                 v-show="
@@ -700,6 +706,27 @@
         </div>
       </q-card>
     </q-dialog>
+    <q-dialog v-model="imguploadForm">
+      <q-card class="shadow-24">
+        <q-bar class="bg-light-blue-10 text-white rounded-borders" style="height: 30px">
+          <div>{{ $t('imgupload') }}</div>
+          <q-space />
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip>{{ $t('index.close') }}</q-tooltip>
+          </q-btn>
+        </q-bar>
+        <q-uploader
+          :url="imgupload_pathname + imguploadid"
+          method="post"
+          :headers="[{ name: 'token', value: token }, { name: 'language', value: lang }, { name: 'operator', value: login_id }]"
+          :field-name="file => imguploadid"
+          color="green"
+          text-color="black"
+          style="max-width: 300px"
+          accept=".jpg, image/*"
+        />
+      </q-card>
+    </q-dialog>
     <q-dialog v-model="viewForm">
       <q-card id="printMe">
         <q-bar class="bg-light-blue-10 text-white rounded-borders" style="height: 50px">
@@ -903,6 +930,7 @@
 <router-view />
 
 <script>
+import { baseurl } from 'boot/axios_request';
 import { getauth, postauth, putauth, deleteauth, ViewPrintAuth } from 'boot/axios_request'
 import { LocalStorage } from 'quasar'
 
@@ -910,6 +938,9 @@ export default {
   name: 'Pagednlist',
   data () {
     return {
+      token: LocalStorage.getItem('openid'),
+      lang: LocalStorage.getItem('lang'),
+      login_id: LocalStorage.getItem('login_id'),
       openid: '',
       login_name: '',
       authin: '0',
@@ -932,6 +963,7 @@ export default {
       columns: [
         { name: 'dn_code', required: true, label: this.$t('outbound.view_dn.dn_code'), align: 'left', field: 'dn_code' },
         { name: 'dn_status', label: this.$t('outbound.view_dn.dn_status'), field: 'dn_status', align: 'center' },
+        { name: 'dn_image', label: this.$t('outbound.view_dn.dn_image'), field: 'dn_image', align: 'center' },
         { name: 'total_weight', label: this.$t('outbound.view_dn.total_weight'), field: 'total_weight', align: 'center' },
         { name: 'total_volume', label: this.$t('outbound.view_dn.total_volume'), field: 'total_volume', align: 'center' },
         { name: 'customer', label: this.$t('outbound.view_dn.customer'), field: 'customer', align: 'center' },
@@ -975,6 +1007,10 @@ export default {
       goodsData8: { bin: '', code: '', qty: '' },
       goodsData9: { bin: '', code: '', qty: '' },
       goodsData10: { bin: '', code: '', qty: '' },
+      imguploadForm: false,
+      imguploadid: 0,
+      imgupload_pathname: baseurl + '/dn/imgupload/',
+      imgupload_pathname_get: 'statics/imgupload/dn/',
       editid: 0,
       editFormData: {},
       pickedForm: false,
@@ -1302,6 +1338,12 @@ export default {
       for (let i = 1; i <= 10; i++) {
         _this[`goodsData${i}`] = { code: '', qty: '' }
       }
+    },
+    imgupload(e) {
+      var _this = this;
+      _this.imguploadForm = true;
+      _this.imguploadid = e;
+      console.log(_this.imgupload_pathname);
     },
     editData (e) {
       var _this = this
