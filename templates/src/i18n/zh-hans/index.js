@@ -370,6 +370,7 @@ export default {
     view_dn: {
       dn_code: '发货单号',
       dn_status: '发货单状态',
+      dn_image: '发货单图片',
       goods_qty: '订单数量',
       intransit_qty: '已发货数量',
       delivery_actual_qty: '实际到货数量',
