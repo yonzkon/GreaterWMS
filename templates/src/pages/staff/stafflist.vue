@@ -16,6 +16,7 @@
         :table-style="{ height: height }"
         flat
         bordered
+        dense
       >
         <template v-slot:top>
           <q-btn-group push>
@@ -281,6 +282,7 @@ export default {
       var _this = this
       getauth(_this.pathname, {})
         .then(res => {
+          console.log(res.results);
           _this.table_list = res.results
           if (LocalStorage.getItem('lang') === 'zh-hans') {
             _this.table_list.forEach((item, index) => {

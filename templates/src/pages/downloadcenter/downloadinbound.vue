@@ -15,6 +15,7 @@
         :table-style="{ height: height }"
         flat
         bordered
+        dense
       >
         <template v-slot:top>
           <div class="flex items-center">
@@ -207,7 +208,7 @@ export default {
           this.dateArray = val.split('/');
           this.searchUrl = this.pathname + 'list/?' + 'create_time__year=' + this.dateArray[0] + '&' + 'create_time__month=' + this.dateArray[1] + '&' + 'create_time__day=' + this.dateArray[2];
           this.downloadUrl = this.pathname + 'filelist/?' + 'create_time__year=' + this.dateArray[0] + '&' + 'create_time__month=' + this.dateArray[1] + '&' + 'create_time__day=' + this.dateArray[2];
-          this.downloadDetailUrl = this.pathname + 'filedetail/?' + 'create_time__year=' + this.dateArray[0] + '&' + 'create_time__month=' + this.dateArray[1] + '&' + 'create_time__day=' + this.dateArray[2];     
+          this.downloadDetailUrl = this.pathname + 'filedetail/?' + 'create_time__year=' + this.dateArray[0] + '&' + 'create_time__month=' + this.dateArray[1] + '&' + 'create_time__day=' + this.dateArray[2];
         }
         this.date_range = this.date_range.replace(/\//g, '-');
         this.getSearchList();
