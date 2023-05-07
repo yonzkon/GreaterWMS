@@ -21,6 +21,7 @@
           }}</q-toolbar-title>
         </transition>
         <q-space />
+        <!--
         <transition appear enter-active-class="animated zoomIn">
           <q-btn
             icon="img:statics/icons/android.png"
@@ -38,23 +39,7 @@
             </q-tooltip>
           </q-btn>
         </transition>
-        <transition appear enter-active-class="animated zoomIn">
-          <q-btn
-            icon="img:statics/icons/GitHub.png"
-            round
-            dense
-            flat
-            @click="brownlink('https://github.com/Singosgu/GreaterWMS')"
-            style="margin: 0 10px 0 10px"
-          >
-            <q-tooltip
-              content-class="bg-amber text-black shadow-4"
-              :offset="[15, 15]"
-              content-style="font-size: 12px"
-              >GitHub Link</q-tooltip
-            >
-          </q-btn>
-        </transition>
+        -->
         <transition appear enter-active-class="animated zoomIn">
           <q-btn
             round
