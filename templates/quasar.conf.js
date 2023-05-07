@@ -79,7 +79,7 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      port: 8080,
+      port: 9000,
       open: true // opens browser window automatically
     },
 
@@ -162,8 +162,8 @@ module.exports = function (/* ctx */) {
       workboxOptions: {}, // only for GenerateSW
       manifest: {
         name: 'wms templates',
-        short_name: 'GreaterWMS--Open Source Warehouse Management System',
-        description: 'GreaterWMS--Open Source Warehouse Management System',
+        short_name: 'SamzonWMS--Open Source Warehouse Management System',
+        description: 'SamzonWMS--Open Source Warehouse Management System',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -229,7 +229,7 @@ module.exports = function (/* ctx */) {
         // https://www.electron.build/configuration/configuration
 
         appId: 'com.electron.greaterwms',
-        productName: 'GreaterWMS',
+        productName: 'SamzonWMS',
         copyright: '2022SR0153577',
         publish: [
           {
@@ -259,12 +259,12 @@ module.exports = function (/* ctx */) {
           ]
         },
         nsis: {
-          uninstallDisplayName: 'GreaterWMS',
+          uninstallDisplayName: 'SamzonWMS',
           oneClick: false,
           allowToChangeInstallationDirectory: true,
           createDesktopShortcut: true,
           createStartMenuShortcut: true,
-          shortcutName: 'GreaterWMS',
+          shortcutName: 'SamzonWMS',
           runAfterFinish: true
         },
         compression: 'maximum'

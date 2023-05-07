@@ -21,6 +21,7 @@
           }}</q-toolbar-title>
         </transition>
         <q-space />
+        <!--
         <transition appear enter-active-class="animated zoomIn">
           <q-btn
             v-show="lang !== 'zh-hans'"
@@ -110,6 +111,7 @@
             >
           </q-btn>
         </transition>
+        -->
         <transition appear enter-active-class="animated zoomIn">
           <q-btn
             icon="api"
