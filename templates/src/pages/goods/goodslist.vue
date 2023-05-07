@@ -85,7 +85,11 @@
               <q-td key="goods_supplier" :props="props">{{ props.row.goods_supplier }}</q-td>
             </template>
             <template>
-              <q-td key="goods_image" :props="props">
+              <q-td
+                key="goods_image"
+                :props="props"
+                @dblclick="imgshow(props.row.id)"
+              >
                 <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="width: 100px"></q-img>
               </q-td>
             </template>
@@ -603,6 +607,9 @@
         />
       </q-card>
     </q-dialog>
+    <q-dialog v-model="imgshowForm">
+      <q-img :src="imgupload_pathname_get + imgshowid" crossorigin="anonymous" style="max-width: 800px"></q-img>
+    </q-dialog>
     <q-dialog v-model="viewForm">
       <div id="printMe" style="width: 400px;height:280px;background-color: white">
         <q-card-section>
@@ -716,6 +723,8 @@ export default {
       },
       imguploadForm: false,
       imguploadid: 0,
+      imgshowForm: false,
+      imgshowid: 0,
       imgupload_pathname: baseurl + '/goods/imgupload/',
       imgupload_pathname_get: 'statics/imgupload/goods/',
       editid: 0,
@@ -921,6 +930,11 @@ export default {
       var _this = this;
       _this.imguploadForm = true;
       _this.imguploadid = e;
+    },
+    imgshow(e) {
+      var _this = this;
+      _this.imgshowForm = true;
+      _this.imgshowid = e;
     },
     editData(e) {
       var _this = this;
