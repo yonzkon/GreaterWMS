@@ -48,7 +48,11 @@
           <q-tr :props="props">
             <q-td key="dn_code" :props="props">{{ props.row.dn_code }}</q-td>
             <q-td key="dn_status" :props="props">{{ props.row.dn_status }}</q-td>
-            <q-td key="dn_image" :props="props">
+            <q-td
+              key="dn_image"
+              :props="props"
+              @dblclick="imgshow(props.row.id)"
+            >
               <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="width: 100px"></q-img>
             </q-td>
             <q-td key="total_weight" :props="props">{{ props.row.total_weight.toFixed(4) }}</q-td>
@@ -133,7 +137,20 @@
               >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('outbound.pod') }}</q-tooltip>
               </q-btn>
-              <q-btn round flat push color="green" icon="upload" @click="imgupload(props.row.id)">
+              <q-btn
+                v-show="
+                  $q.localStorage.getItem('staff_type') !== 'Supplier' &&
+                    $q.localStorage.getItem('staff_type') !== 'Customer' &&
+                    $q.localStorage.getItem('staff_type') !== 'Inbound' &&
+                    $q.localStorage.getItem('staff_type') !== 'StockControl'
+                "
+                round
+                flat
+                push
+                color="green"
+                icon="upload"
+                @click="imgupload(props.row.id)"
+              >
                 <q-tooltip content-class="bg-amber text-black shadow-4" :offset="[10, 10]" content-style="font-size: 12px">{{ $t('imgupload') }}</q-tooltip>
               </q-btn>
               <q-btn
@@ -674,6 +691,9 @@
         />
       </q-card>
     </q-dialog>
+    <q-dialog v-model="imgshowForm">
+      <q-img :src="imgupload_pathname_get + imgshowid" crossorigin="anonymous" style="max-width: 800px"></q-img>
+    </q-dialog>
     <q-dialog v-model="viewForm">
       <q-card id="printMe">
         <q-bar class="bg-light-blue-10 text-white rounded-borders" style="height: 50px">
@@ -956,6 +976,8 @@ export default {
       goodsData10: { bin: '', code: '', qty: '' },
       imguploadForm: false,
       imguploadid: 0,
+      imgshowForm: false,
+      imgshowid: 0,
       imgupload_pathname: baseurl + '/dn/imgupload/',
       imgupload_pathname_get: 'statics/imgupload/dn/',
       editid: 0,
@@ -1327,7 +1349,11 @@ export default {
       var _this = this;
       _this.imguploadForm = true;
       _this.imguploadid = e;
-      console.log(_this.imgupload_pathname);
+    },
+    imgshow(e) {
+      var _this = this;
+      _this.imgshowForm = true;
+      _this.imgshowid = e;
     },
     editData (e) {
       var _this = this
