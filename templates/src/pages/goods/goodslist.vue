@@ -394,7 +394,7 @@
             <q-tooltip content-class="bg-amber text-black shadow-4">{{ $t('index.close') }}</q-tooltip>
           </q-btn>
         </q-bar>
-        <q-card-section style="max-height: 525px; width: 400px" class="scroll">
+        <q-card-section style="max-height: 625px; width: 400px" class="scroll">
           <q-input
             dense
             outlined
