@@ -66,7 +66,7 @@
               :props="props"
               @dblclick="imgshow(props.row.id)"
             >
-              <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="width: 100px"></q-img>
+              <q-img :src="imgupload_pathname_get + props.row.id" crossorigin="anonymous" style="max-height: 40px; max-width: 100px"></q-img>
             </q-td>
             <q-td key="total_weight" :props="props">{{ props.row.total_weight.toFixed(4) }}</q-td>
             <q-td key="total_volume" :props="props">{{ props.row.total_volume.toFixed(4) }}</q-td>
