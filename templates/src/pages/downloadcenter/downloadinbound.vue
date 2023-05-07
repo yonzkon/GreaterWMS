@@ -15,6 +15,7 @@
         :table-style="{ height: height }"
         flat
         bordered
+        dense
       >
         <template v-slot:top>
           <div class="flex items-center">

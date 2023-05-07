@@ -16,6 +16,7 @@
         :table-style="{ height: height }"
         flat
         bordered
+        dense
       >
         <template v-slot:top>
           <q-btn-group push>
@@ -270,6 +271,7 @@ export default {
       var _this = this
       getauth(_this.pathname + '?page=' + '' + _this.current, {})
         .then(res => {
+          console.log(res.results);
           _this.table_list = res.results
           _this.total = res.count
           if (res.count === 0) {
