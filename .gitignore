@@ -9,3 +9,4 @@ delete.py
 *.xlsx
 logs/
 bfg.jar
+0001_initial.py
